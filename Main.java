@@ -31,7 +31,17 @@ public class Main {
         System.out.println("Schedule 1: " + schedule1);
         System.out.println("Schedule 2: " + schedule2);
 
-        System.out.println("Result: " + algorithm(schedule1, schedule2, Duration.ofMinutes(30)));
+        List<Period> expectedValue = new ArrayList<>();
+        expectedValue.add(new Period(LocalTime.of(8,00), LocalTime.of(9, 00)));
+        expectedValue.add(new Period(LocalTime.of(15,00), LocalTime.of(16, 00)));
+        expectedValue.add(new Period(LocalTime.of(18,30), LocalTime.of(21, 30)));
+
+
+        List<Period> result = algorithm(schedule1, schedule2, Duration.ofMinutes(60));
+
+        System.out.println("Result: " + result);
+        System.out.println("Expected: " + expectedValue);
+        System.out.println("Result equals Expected ? : " + result.equals(expectedValue));
     }
 
     private static List<Period> algorithm(Schedule firstSchedule, Schedule secondSchedule, Duration meetingDuration){
@@ -47,7 +57,7 @@ public class Main {
 
         if(Duration.between(possibleStart, possibleEnd).compareTo(meetingDuration) == -1) {
             System.out.println("not enought time");
-            return null;
+            return new ArrayList<>();
         }
 
 

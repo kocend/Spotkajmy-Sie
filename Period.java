@@ -33,4 +33,10 @@ public class Period {
                 ", end=" + end +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Period second = (Period) obj;
+        return this.beginning().equals(second.beginning) && this.end().equals(second.end());
+    }
 }
